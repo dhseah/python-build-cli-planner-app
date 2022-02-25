@@ -27,6 +27,7 @@ from src.external_reminders import EveningReminder
 CONCRETE_CLASS_NAME = 'DateReminder'
 ABSTRACT_METHOD_NAME = 'is_due'
 
+
 class DummyReminder:
     def __init__(self, *args, **kwargs):
         pass
@@ -72,6 +73,7 @@ def test_task_1_regular_class_implementation():
 
 # === TASK 2 ========================================================================
 
+
 @pytest.mark.test_task_2_overriding_text
 def test_task_2_overriding_text():
     test_task_1_regular_class_implementation()
@@ -83,6 +85,7 @@ def test_task_2_overriding_text():
         '`PoliteReminder` should prefix the passed string with your prefix'
 
 # === TASK 3-4 ======================================================================
+
 
 @pytest.mark.test_task_3_DeadlinedMetaReminder
 def test_task_3_DeadlinedMetaReminder():
@@ -98,12 +101,14 @@ def test_task_3_DeadlinedMetaReminder():
     assert inspect.isclass(cls), f'`{class_name}` is not a class'
 
     assert inspect.isabstract(cls), f'{class_name} should be abstract'
-    assert type(cls) == ABCMeta, f'{class_name} should be an Abstract Base Class'
-    assert issubclass(cls, Iterable), f'{class_name} should inherit from `collections.abc.Iterable`'
+    assert type(
+        cls) == ABCMeta, f'{class_name} should be an Abstract Base Class'
+    assert issubclass(
+        cls, Iterable), f'{class_name} should inherit from `collections.abc.Iterable`'
 
     # --- CHECK METHOD ----------------------------
     assert hasattr(cls, ABSTRACT_METHOD_NAME),\
-         f'Could not find `{ABSTRACT_METHOD_NAME}` in `{class_name}`'
+        f'Could not find `{ABSTRACT_METHOD_NAME}` in `{class_name}`'
     assert ABSTRACT_METHOD_NAME in cls.__abstractmethods__,\
         f'Method {ABSTRACT_METHOD_NAME} is not abstract in class {class_name}'
 
@@ -125,14 +130,16 @@ def test_task_4_DeadlinedReminder():
     assert inspect.isclass(cls), f'`{class_name}` is not a class'
 
     assert inspect.isabstract(cls), f'{class_name} should be abstract'
-    assert type(cls) == ABCMeta, f'{class_name} should be an Abstract Base Class'
-    assert issubclass(cls, Iterable), f'{class_name} should inherit from `collections.abc.Iterable`'
+    assert type(
+        cls) == ABCMeta, f'{class_name} should be an Abstract Base Class'
+    assert issubclass(
+        cls, Iterable), f'{class_name} should inherit from `collections.abc.Iterable`'
 
     assert ABC in cls.__mro__, 'Class `DeadlinedReminder` should inherit from `ABC`'
 
     # --- CHECK METHOD ----------------------------
     assert hasattr(cls, ABSTRACT_METHOD_NAME),\
-         f'Could not find `{ABSTRACT_METHOD_NAME}` in `{class_name}`'
+        f'Could not find `{ABSTRACT_METHOD_NAME}` in `{class_name}`'
     assert ABSTRACT_METHOD_NAME in cls.__abstractmethods__,\
         f'Method {ABSTRACT_METHOD_NAME} is not abstract in class {class_name}'
 
@@ -284,6 +291,7 @@ def test_task_8_update_interface(backup_reminders_csv):
 
 # === TASK 9 ========================================================================
 
+
 @pytest.mark.test_task_9_accept_class
 def test_task_9_accept_class(backup_reminders_csv):
     test_task_6_is_due()
@@ -324,6 +332,7 @@ def test_task_9_accept_class(backup_reminders_csv):
 
 # === TASK 10 ========================================================================
 
+
 @pytest.mark.test_task_10_subclasshook
 def test_task_10_subclasshook(backup_reminders_csv):
     test_task_4_DeadlinedReminder()
@@ -339,11 +348,11 @@ def test_task_10_subclasshook(backup_reminders_csv):
 
     assert issubclass(EveningReminder, DeadlinedReminder),\
         '`__subclasshook__` gives wrong result for class that'\
-            ' respects the protocol of `DeadlinedReminder`'
+        ' respects the protocol of `DeadlinedReminder`'
 
     assert not issubclass(DummyReminder, DeadlinedReminder),\
         '`__subclasshook__` gives wrong result for class that '\
-            ' does not respect the protocol of `DeadlinedReminder`'
+        ' does not respect the protocol of `DeadlinedReminder`'
 
     # --- task_10_add_reminder_evening ---------------------------------
     assert hasattr(app, 'EveningReminder'),\
@@ -356,10 +365,12 @@ def test_task_10_subclasshook(backup_reminders_csv):
 
 # === TASK 11 ========================================================================
 
+
 @pytest.mark.test_task_11_add_reminder_isinstance
 def test_task_11_add_reminder_isinstance():
     code_lines, starts_on = inspect.getsourcelines(database.add_reminder)
-    EXISTS_LINE_WITH_issubclass = any('issubclass' in line for line in code_lines)
+    EXISTS_LINE_WITH_issubclass = any(
+        'issubclass' in line for line in code_lines)
     assert not EXISTS_LINE_WITH_issubclass,\
         'You should remove the `issubclass` check'
 
@@ -380,10 +391,11 @@ def test_task_11_add_reminder_isinstance():
     assert IDX_LINE_WITH_isinstance is not None,\
         'You should add a check for `isinstance`'
     assert IDX_LINE_WITH_constructor is not None \
-           and IDX_LINE_WITH_constructor < IDX_LINE_WITH_isinstance,\
+        and IDX_LINE_WITH_constructor < IDX_LINE_WITH_isinstance,\
         'You should construct the `reminder` before checking `isinstance()`'
 
 # === TASK 12 ========================================================================
+
 
 @pytest.mark.test_task_12_register_polite_reminder
 def test_task_12_register_polite_reminder():
